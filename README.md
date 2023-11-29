@@ -8,7 +8,8 @@ For running the bot you need to run the application 'hobot' from github:
 1. follow the link https://github.com/4LEXNIK/hobot
 2. press the button "." for  starting online IDE
 3. open new Bash terminal
-	Run following commands
+	
+    Run following commands
 
 `read -s TELE_TOKEN`
 
