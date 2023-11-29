@@ -31,7 +31,7 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		
-		fmt.Printf("hobot started", appVersion)
+		fmt.Printf("hobot started %s", appVersion)
 
 		hobot, err := telebot.NewBot(telebot.Settings{
 			URL: "",
