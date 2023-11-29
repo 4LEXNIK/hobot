@@ -1,14 +1,21 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"log"
+	"os"
+	"time"
 
 	"github.com/spf13/cobra"
 	telebot "gopkg.in/telebot.v3"
+)
+
+var (
+	//Teletoken bot
+	TeleToken = os.Getenv("TELE_TOKEN")
 )
 
 // hobotCmd represents the hobot command
@@ -25,10 +32,10 @@ to quickly create a Cobra application.`,
 		
 		fmt.Printf("hobot started", appVersion)
 
-		hobot, err := telebot.NewBot(telebot.Settings){
+		hobot, err := telebot.NewBot(telebot.Settings{
 			URL: "",
 			Token: TeleToken,
-			Poller: &telebot.LongPoller{timeout: 10 * time.Second},
+			Poller: &telebot.LongPoller{Timeout: 10 * time.Second},
 		})
 
 		if err != nil {
@@ -37,7 +44,14 @@ to quickly create a Cobra application.`,
 		}
 
 		hobot.Handle(telebot.OnText, func(m telebot.Context) error {
-			log.Print(m.Message(),Payload, m.Text())
+			
+			log.Print(m.Message().Payload, m.Text())
+			payload := m.Message().Payload
+
+			switch payload {
+			case "hello":
+				err = m.Send(fmt.Sprintf("Hello i'm hobot %s", appVersion))
+			}
 
 			return err
 
