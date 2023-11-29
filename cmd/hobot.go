@@ -22,7 +22,27 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("hobot called")
+		
+		fmt.Printf("hobot started", appVersion)
+
+		hobot, err := telebot.NewBot(telebot.Settings){
+			URL: "",
+			Token: TeleToken,
+			Poller: &telebot.LongPoller{timeout: 10 * time.Second},
+		})
+
+		if err != nil {
+			log.Fatalf("Please check TELE_TOKEN env variable. %s", err)
+			return
+		}
+
+		hobot.Handle(telebot.OnText, func(m telebot.Context) error {
+			log.Print(m.Message(),Payload, m.Text())
+
+			return err
+
+		})
+		hobot.Start()
 	},
 }
 
