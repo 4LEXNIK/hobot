@@ -1,6 +1,6 @@
-FROM golang:1.21.5 as builder
+FROM golang:1.21 as builder
 
-WORKDIR /go/scr/app
+WORKDIR /go/src/app
 COPY . .
 RUN make build
 
