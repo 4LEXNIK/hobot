@@ -29,3 +29,16 @@ push:
 
 clean:
 	rm -rf hobot
+
+# Добавляем новые цели для сборки под разные платформы
+linux:
+	$(MAKE) build TARGETOS=linux TARGETARCH=amd64
+
+arm:
+	$(MAKE) build TARGETOS=linux TARGETARCH=arm64
+
+macos:
+	$(MAKE) build TARGETOS=darwin TARGETARCH=amd64
+
+windows:
+	$(MAKE) build TARGETOS=windows TARGETARCH=amd64
